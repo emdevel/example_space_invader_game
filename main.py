@@ -22,6 +22,16 @@ PLAYER_RECT.midleft = ((400,564)) # Sets the starting position of the player
 K_LEFT_DOWN = False
 K_RIGHT_DOWN = False
 
+# Enemies
+LIST_ENEMIES = [] # Creates an empty list to store your enemies
+ENEMY_IMAGE = pygame.image.load("images/enemy.png") # Loads image of enemies
+for i in range(0,4): # Creates a loop that repeats 4 times
+    for j in range(0,4): # Creates a loop within the loop that repeats 4 times
+        ENEMY_RECT = ENEMY_IMAGE.get_rect() # Creates a rectangle of the enemy
+        ENEMY_RECT.topleft = ( (50+(50*i) , 40+(30*j)) ) # Repositions the enemy
+        LIST_ENEMIES.append(ENEMY_RECT) # Adds the enemy to the list
+    
+
 while is_running: # The main game loop
     for event in pygame.event.get():
         if event.type == pygame.QUIT: # Checks if the X is pressed
@@ -47,6 +57,11 @@ while is_running: # The main game loop
     SCREEN.fill(BLACK) # Make the entire screen black.
     pygame.draw.rect(SCREEN,WHITE,GROUND) # Draw a rectangle at the bottom of the screen.
 
+    # Player blit
     SCREEN.blit(PLAYER_IMAGE,PLAYER_RECT)
+
+    # Enemy blit
+    for enemy in LIST_ENEMIES:
+        SCREEN.blit(ENEMY_IMAGE,enemy)
 
     pygame.display.update() # Take all of the images on the screen and display them.
