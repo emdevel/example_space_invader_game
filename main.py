@@ -26,6 +26,7 @@ K_RIGHT_DOWN = False
 # Enemies
 LIST_ENEMIES = [] # Creates an empty list to store your enemies
 ENEMY_MOVING_LEFT = True
+ENEMY_MOVE_DOWN = True
 ENEMY_IMAGE = pygame.image.load("images/enemy.png") # Loads image of enemies
 for i in range(0,4): # Creates a loop that repeats 4 times
     for j in range(0,4): # Creates a loop within the loop that repeats 4 times
@@ -72,11 +73,18 @@ while is_running: # The main game loop
             enemy.x+=1
             if enemy.x > 800:
                 ENEMY_MOVING_LEFT = False
+                ENEMY_MOVE_DOWN = True
     
         else:
             enemy.x-=1
             if enemy.x <0:
                 ENEMY_MOVING_LEFT = True
+                ENEMY_MOVE_DOWN = True
+
+    if ENEMY_MOVE_DOWN:
+        for enemy in LIST_ENEMIES:
+            enemy.y+=15
+        ENEMY_MOVE_DOWN = False
 
     # Bullet movement
     for bullet in LIST_BULLETS:
